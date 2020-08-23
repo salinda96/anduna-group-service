@@ -2,6 +2,8 @@ package lk.andunaechomedia.controllers;
 
 import lk.andunaechomedia.models.MainSchedulePlayFile;
 import lk.andunaechomedia.repositories.DeviceRepo;
+import lk.andunaechomedia.repositories.FileRepo;
+import lk.andunaechomedia.repositories.MainSchedulePlayFileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -31,18 +33,22 @@ import java.util.Set;
 public class RaspberryPIRequestController {
     @Autowired
     DeviceRepo deviceRepo;
+    @Autowired
+    FileRepo fileRepo;
+    @Autowired
+    MainSchedulePlayFileRepo mainSchedulePlayFileRepo;
 
     @RequestMapping(method = RequestMethod.GET,value = "/get/rapPI/schedule/{deviceId}")
     public ArrayList<HashMap<String,String> >getSchedules(@PathVariable String deviceId){
 
         ArrayList data =new <HashMap<String,String>>ArrayList();
-       Set<MainSchedulePlayFile> mainScheduleHasFile=deviceRepo.findById(deviceId).get().getDeviceGroup().getMainSchedule().getMainSchedulePlayFile();
+       Set<MainSchedulePlayFile> mainScheduleHasFile=mainSchedulePlayFileRepo.findByMainSchedule(deviceRepo.findById(deviceId).get().getDeviceGroup().getMainSchedule().getScheduleId());
 
        mainScheduleHasFile.forEach((schedules)->{
            HashMap schedule=new HashMap<String,Integer>();
-           String name=new File(schedules.getFile().getFile_path()).getName();
+           String name=new File(fileRepo.findById(schedules.getFile()).get().getFile_path()).getName();
            ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/file/").path(name).toUriString();
-           schedule.put("fileId",schedules.getFile().getFile_id());
+           schedule.put("fileId",fileRepo.findById(schedules.getFile()).get().getFile_id());
            schedule.put("link",ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/file/").path(name).toUriString());
            schedule.put("playPoint",Integer.toString(schedules.getPlayPoint()));
             data.add(schedule);
