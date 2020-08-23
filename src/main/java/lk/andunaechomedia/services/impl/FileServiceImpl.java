@@ -41,4 +41,9 @@ public class FileServiceImpl implements FileService {
             return saveFileDto;
         }
 
+    @Override
+    public boolean findFile(String fileId) {
+        return false;
+    }
+
 }
