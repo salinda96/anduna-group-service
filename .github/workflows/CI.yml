@@ -19,8 +19,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
     - name: Build with Maven jar
       run: mvn clean package spring-boot:repackage
     - uses: actions/checkout@master
@@ -28,7 +26,7 @@ jobs:
       with:
         args: --acl public-read
       env:
-        SOURCE_DIR: '/home/runner/work/***-group-service/***-group-service'
+        SOURCE_DIR: '/home/runner/work/group-service/group-service/target'
         SPACE_NAME: ${{ secrets.NAME }}
         SPACE_REGION: ${{ secrets.REGION }}
         SPACE_ACCESS_KEY_ID: ${{ secrets.KEY }}
