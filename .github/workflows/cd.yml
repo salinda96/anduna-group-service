@@ -15,6 +15,6 @@ jobs:
       env:
         SOURCE_DIR: './public'
         SPACE_NAME: ${{ secrets.NAME }}
-        SPACE_REGION: ${{ AMS2 }}
+        SPACE_REGION: ${{ secrets.REGION }}
         SPACE_ACCESS_KEY_ID: ${{ secrets.KEY }}
         SPACE_SECRET_ACCESS_KEY: ${{ secrets.SKEY }}
