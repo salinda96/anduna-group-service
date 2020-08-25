@@ -14,7 +14,7 @@ jobs:
         args: --acl public-read
       env:
         SOURCE_DIR: './public'
-        SPACE_NAME: ${{ andunacicd }}
+        SPACE_NAME: ${{ secrets.NAME }}
         SPACE_REGION: ${{ AMS2 }}
-        SPACE_ACCESS_KEY_ID: ${{ LM2OH7SIDY45GSPWVVTW }}
-        SPACE_SECRET_ACCESS_KEY: ${{ HLU+ZQJFocjESPtKNuqs74TT6RBGBxFMfLKDbF2UNiA }}
+        SPACE_ACCESS_KEY_ID: ${{ secrets.KEY }}
+        SPACE_SECRET_ACCESS_KEY: ${{ secrets.SKEY }}
