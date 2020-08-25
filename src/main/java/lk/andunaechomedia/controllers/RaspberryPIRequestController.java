@@ -1,54 +1,54 @@
 package lk.andunaechomedia.controllers;
 
 import lk.andunaechomedia.models.MainSchedulePlayFile;
+import lk.andunaechomedia.models.TempSchedulePlayFile;
 import lk.andunaechomedia.repositories.DeviceRepo;
 import lk.andunaechomedia.repositories.FileRepo;
 import lk.andunaechomedia.repositories.MainSchedulePlayFileRepo;
+import lk.andunaechomedia.repositories.TempSchedulePlayFileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URLConnection;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+
 @RestController
 public class RaspberryPIRequestController {
     @Autowired
     DeviceRepo deviceRepo;
     @Autowired
+    MainSchedulePlayFileRepo mainSchedulePlayFileRepo;
+    @Autowired
     FileRepo fileRepo;
     @Autowired
-    MainSchedulePlayFileRepo mainSchedulePlayFileRepo;
+    TempSchedulePlayFileRepo tempSchedulePlayFileRepo;
 
     @RequestMapping(method = RequestMethod.GET,value = "/get/rapPI/schedule/{deviceId}")
     public ArrayList<HashMap<String,String> >getSchedules(@PathVariable String deviceId){
 
         ArrayList data =new <HashMap<String,String>>ArrayList();
-       Set<MainSchedulePlayFile> mainScheduleHasFile=mainSchedulePlayFileRepo.findByMainSchedule(deviceRepo.findById(deviceId).get().getDeviceGroup().getMainSchedule().getScheduleId());
+        ;
+       Set<MainSchedulePlayFile> mainScheduleHasFile=mainSchedulePlayFileRepo.findByMainSchedule(deviceRepo
+                .findById(deviceId)
+                .get().getDeviceGroup()
+                .getMainSchedule().getScheduleId());
 
        mainScheduleHasFile.forEach((schedules)->{
-           HashMap schedule=new HashMap<String,Integer>();
-           String name=new File(fileRepo.findById(schedules.getFile()).get().getFile_path()).getName();
-           ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/file/").path(name).toUriString();
-           schedule.put("fileId",fileRepo.findById(schedules.getFile()).get().getFile_id());
+           HashMap schedule=new HashMap<String,String>();
+           lk.andunaechomedia.models.File file=fileRepo.findById(schedules.getFile()).get();
+           String name=new File(file.getFile_path()).getName();
+           schedule.put("fileId",file.getFile_id());
            schedule.put("link",ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/file/").path(name).toUriString());
            schedule.put("playPoint",Integer.toString(schedules.getPlayPoint()));
             data.add(schedule);
@@ -59,6 +59,24 @@ public class RaspberryPIRequestController {
 
 
         return data;
+    }
+
+    @RequestMapping(value = "/get/rasPi/poster/{deviceId}", method = RequestMethod.GET)
+    public ArrayList<HashMap<String,String>> getPoster(@PathVariable String deviceId){
+        ArrayList <HashMap<String,String >> posterData = new ArrayList<>();
+        Set<TempSchedulePlayFile> posters = tempSchedulePlayFileRepo.findByTempScheduleId(deviceRepo.findById(deviceId).get().getDeviceGroup().getTempSchedule().getTempId());
+        posters.forEach((poster)->{
+            HashMap posterSchedule = new HashMap<String ,String>();
+            lk.andunaechomedia.models.File file = fileRepo.findById(poster.getFileId()).get();
+            String fileName = new File(file.getFile_path()).getName();
+            posterSchedule.put("startTime",poster.getStartTime());
+            posterSchedule.put("id",file.getFile_id());
+            posterSchedule.put("link",ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/file/").path(fileName).toUriString());
+            posterSchedule.put("duration",Integer.toString(poster.getDuration()));
+            posterData.add(posterSchedule);
+
+        });
+        return posterData;
     }
 
 @RequestMapping(method = RequestMethod.GET,value = "/download/file/{fileName:.+}")
@@ -89,6 +107,9 @@ public class RaspberryPIRequestController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename\""+resource.getFilename()+"\"")
                 .body(resource);
     }
+
+
+}
 
 //    private static final String EXTERNAL_FILE_PATH = "/andunaEcho/files/";
 //
@@ -132,5 +153,3 @@ public class RaspberryPIRequestController {
 //
 //        }
 //    }
-
-}

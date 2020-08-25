@@ -28,22 +28,19 @@ public class FileServiceImpl implements FileService {
             if(!(new java.io.File(System.getProperty("user.home")+"/andunaEcho/files").exists())){
                 new java.io.File(System.getProperty("user.home")+"/andunaEcho/files").mkdirs();
             }
-            path= Paths.get(System.getProperty("user.home")+"/andunaEcho/files/"+filename) ;
+            path= Paths.get(System.getProperty("user.home")+"/andunaEcho/files/"+filename);
             saveFile.setFile_path(path.toString());
             fileRepo.save(saveFile);
             try {
                 Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
             }
-
             catch (IOException e){
                 System.out.println(e);
             }
             return saveFileDto;
         }
-
-    @Override
-    public boolean findFile(String fileId) {
-        return false;
-    }
-
+        @Override
+    public boolean findFile(String fileId){
+        return fileRepo.existsById(fileId);
+        }
 }
