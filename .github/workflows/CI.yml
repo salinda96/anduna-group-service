@@ -23,9 +23,6 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build with Maven jar
       run: mvn clean package spring-boot:repackage
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
     - uses: actions/checkout@master
     - uses: idlefingers/do-space-sync-action@master
       with:
