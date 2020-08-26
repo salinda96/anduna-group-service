@@ -30,7 +30,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.PKEY }}
-        source: "/target/*.jar"
+        source: "target/*.jar"
         target: "/projects"
  
        
