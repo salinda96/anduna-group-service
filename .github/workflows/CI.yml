@@ -32,5 +32,11 @@ jobs:
         key: ${{ secrets.PKEY }}
         source: "target/*.jar"
         target: "/projects"
- 
+    - name: ls -a via ssh
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: java -jar /projects/target/*.jar
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        privateKey: ${{ secrets.PKEY }}
        
