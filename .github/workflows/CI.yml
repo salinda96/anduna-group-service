@@ -19,12 +19,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: MVN build
-      run: mvn -B package --file pom.xml
-    - name: Build with Maven jar
-      run: mvn clean package spring-boot:repackage
-    - name: RCYNC
-      run: sudo rsync -avuz -e 'ssh -i ${{secrets.PKEY}}' /home/runner/work/anduna-group-service/anduna-group-service/target/ root@159.203.185.33:/
+    - name: Build with Maven jar and RCYNC
+    - run: mvn -B package --file pom.xml
+    - run: mvn clean package spring-boot:repackage
+    - run: sudo rsync -avuz -e 'ssh -i ${{secrets.PKEY}}' target/*.jar root@159.203.185.33:/
+    
+      
+      
 
 #     - uses: actions/checkout@master
 #     - uses: idlefingers/do-space-sync-action@master
