@@ -23,18 +23,14 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build with Maven jar
       run: mvn clean package spring-boot:repackage
-    - name: RCYNC
-      run: sudo rsync -avuz -e 'ssh -i ${{secrets.PKEY}}' target/*.jar root@159.203.185.33:/
-
-#     - uses: actions/checkout@master
-#     - uses: idlefingers/do-space-sync-action@master
-#       with:
-#         args: --acl public-read
-#       env:
-#         SOURCE_DIR: '/home/runner/work/group-service/group-service/target'
-#         SPACE_NAME: ${{ secrets.NAME }}
-#         SPACE_REGION: ${{ secrets.REGION }}
-#         SPACE_ACCESS_KEY_ID: ${{ secrets.KEY }}
-#         SPACE_SECRET_ACCESS_KEY: ${{ secrets.SKEY }}
+    - name: copy file via ssh key
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.PKEY }}
+        source: "target/*.jar"
+        target: "/projects"
  
        
