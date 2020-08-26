@@ -32,11 +32,12 @@ jobs:
         key: ${{ secrets.PKEY }}
         source: "target/*.jar"
         target: "/projects"
-    - name: Run spring via ssh
+    - name: Port kill
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo fuser -k 8080/tcp && java -jar /projects/target/*.jar
+        command: sudo fuser -k 8080/tcp
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         privateKey: ${{ secrets.PKEY }}
+
        
