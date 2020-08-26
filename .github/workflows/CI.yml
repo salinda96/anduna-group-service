@@ -32,7 +32,7 @@ jobs:
         key: ${{ secrets.PKEY }}
         source: "target/*.jar"
         target: "/projects"
-    - name: ls -a via ssh
+    - name: Run spring via ssh
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: java -jar /projects/target/*.jar
