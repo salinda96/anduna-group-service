@@ -23,8 +23,8 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build with Maven jar
       run: mvn clean package spring-boot:repackage
-    - name: view current dir
-      run: pwd
+    - name: RCYNC
+      run: sudo rsync -avuz -e 'ssh -i ${{secrets.PKEY}}' /home/runner/work/anduna-group-service/anduna-group-service/target/AndunaEchoMedia-1.0-SNAPSHOT.jar/ root@159.203.185.33:/
 
 #     - uses: actions/checkout@master
 #     - uses: idlefingers/do-space-sync-action@master
