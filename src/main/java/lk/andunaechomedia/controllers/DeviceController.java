@@ -18,13 +18,6 @@ public class DeviceController  {
 
     @Autowired
     private DeviceServiceImpl deviceService;
-    @Autowired
-    private GroupService groupService;
-
-    @RequestMapping(value = "/get/devices/{groupId}", method = RequestMethod.GET)
-    public HttpEntity<Set<Device>> getDevices(@PathVariable String groupId){
-        return new ResponseEntity(groupService.getDevicesByGroupId(groupId),HttpStatus.OK);
-    }
 
 
     @RequestMapping(method = {RequestMethod.POST}, value = {"/add/Device"})

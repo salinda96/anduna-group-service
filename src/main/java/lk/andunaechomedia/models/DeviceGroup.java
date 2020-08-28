@@ -1,12 +1,17 @@
 package lk.andunaechomedia.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lk.andunaechomedia.constant.GPSStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Set;
+import java.util.Timer;
 
 @Entity
 @Table(name = "device_group")
@@ -26,10 +31,16 @@ public class DeviceGroup implements Serializable {
     @Id
     private String groupId;
     private String groupName;
-   @JsonBackReference (value = "Device-DeviceGroup")
+    private String description;
 
-    @OneToMany(mappedBy = "deviceGroup", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Device> devices;
+    @Enumerated
+    private GPSStatus gpsStatus;
+    @Column(columnDefinition = "TIME")
+    private LocalTime broadCastTime;
+
+    private Integer gpsRepeat;
+
+
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "main_schedule_id")
@@ -38,27 +49,6 @@ public class DeviceGroup implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "temp_id")
     private TempSchedule tempSchedule;
-
-    @Override
-    public String toString() {
-        return "DeviceGroup{" +
-                "groupId='" + groupId + '\'' +
-                ", groupName='" + groupName + '\'' +
-                ", devices=" + devices +
-                ", mainSchedule=" + mainSchedule +
-                '}';
-    }
-
-    public TempSchedule getTempSchedule() {
-        return tempSchedule;
-    }
-
-    public void setTempSchedule(TempSchedule tempSchedule) {
-        this.tempSchedule = tempSchedule;
-    }
-
-
-
 
 
 }
