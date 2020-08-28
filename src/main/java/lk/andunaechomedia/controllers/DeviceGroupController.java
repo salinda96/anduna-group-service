@@ -13,7 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@CrossOrigin(origins = "http://159.203.185.33:3000")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/group")
 public class DeviceGroupController {
     @Autowired
     private GroupService groupService;
@@ -26,10 +27,10 @@ public class DeviceGroupController {
     public DeviceGroupController() {
     }
 
-    @RequestMapping(method = {RequestMethod.POST}, value = {"/add/device_group"})
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/add"})
     @ResponseBody
     public HttpEntity<SaveGroupDto> addGroup(@RequestBody SaveGroupDto group) {
-
+        System.out.println( "oky");
             return  new ResponseEntity(groupService.saveGroup(group), HttpStatus.CREATED);
     }
 
@@ -47,7 +48,7 @@ public class DeviceGroupController {
         path = {"get/devices/from/group/all"}
     )
     @ResponseBody
-    public Iterable<DeviceGroup> deviceGroups() {
+    public Iterable<DeviceGroup> getAllDeviceGroups() {
         return this.deviceGroupRepo.findAll();
     }
 

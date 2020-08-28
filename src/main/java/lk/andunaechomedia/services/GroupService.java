@@ -6,5 +6,4 @@ import java.util.Set;
 
 public interface GroupService {
     public SaveGroupDto saveGroup(SaveGroupDto group);
-    public Set<Device> getDevicesByGroupId(String groupId);
 }
