@@ -26,15 +26,7 @@ public class GroupServiceImpl implements GroupService {
     TempScheduleRepo tempScheduleRepo;
 
     public SaveGroupDto saveGroup(SaveGroupDto group) {
-
-        MainSchedule mainSchedule =mainScheduleRepo.findById(group.getScheduleId()).get();
-        DeviceGroup g= GroupMapper.mapToModel(group, tempScheduleRepo.findById(group.getTempScheduleId()).get());
-        g.setMainSchedule(mainSchedule);
-        groupRepo.save(g);
+        groupRepo.save(GroupMapper.fromSaveDto(group));
         return group;
-    }
-    @Override
-    public Set<Device> getDevicesByGroupId(String groupId){
-        return groupRepo.findById(groupId).get().getDevices();
     }
 }
