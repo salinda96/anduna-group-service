@@ -19,6 +19,7 @@ public class DeviceGroup implements Serializable {
     }
 
     public DeviceGroup(String groupId) {
+
         this.groupId=groupId;
     }
 
