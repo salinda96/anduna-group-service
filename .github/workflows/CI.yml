@@ -28,3 +28,27 @@ jobs:
         password: ${{ secrets.DOCKER_PW}}
         repository: smenaka1104/anduna-group-api
         tags: latest
+ 
+    - name: STOP all containers
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: docker stop $(docker ps -aq)
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        privateKey: ${{ secrets.PKEY }}
+
+    - name: REMOVE all containers
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: docker rm $(docker ps -aq)
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        privateKey: ${{ secrets.PKEY }}
+
+    - name: RUN Container
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: docker run -d -p 8080:8080 smenaka1104/anduna-group-api:latest
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        privateKey: ${{ secrets.PKEY }}
