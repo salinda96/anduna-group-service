@@ -1,5 +1,6 @@
 package lk.andunaechomedia.models;
 import lk.andunaechomedia.constant.GPSStatus;
+import lk.andunaechomedia.constant.DeviceGroupStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +27,8 @@ public class DeviceGroup implements Serializable {
     private String groupId;
     private String groupName;
     private String description;
-
+    @Enumerated
+    private DeviceGroupStatus deviceGroupStatus;
     @Enumerated
     private GPSStatus gpsStatus;
     @Column(columnDefinition = "TIME")
