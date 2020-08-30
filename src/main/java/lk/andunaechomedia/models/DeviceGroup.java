@@ -1,17 +1,11 @@
 package lk.andunaechomedia.models;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lk.andunaechomedia.constant.GPSStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalTime;
-import java.util.Set;
-import java.util.Timer;
 
 @Entity
 @Table(name = "device_group")
@@ -40,15 +34,6 @@ public class DeviceGroup implements Serializable {
 
     private Integer gpsRepeat;
 
-
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "main_schedule_id")
-    private MainSchedule mainSchedule;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "temp_id")
-    private TempSchedule tempSchedule;
 
 
 }
