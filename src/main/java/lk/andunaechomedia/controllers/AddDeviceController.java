@@ -18,8 +18,16 @@ public class AddDeviceController {
     @RequestMapping(method = {RequestMethod.POST}, value = {"/addDevice"})
     @ResponseBody
     public HttpEntity<AddDeviceDto> addDevice(@RequestBody AddDeviceDto newDevice) {
-        System.out.println( "added");
-        return  new ResponseEntity(addDeviceService.addDevice(newDevice), HttpStatus.CREATED);
+
+        try {
+            return  new ResponseEntity(addDeviceService.addDevice(newDevice), HttpStatus.CREATED);
+
+
+        }
+        catch (Exception e){
+            return  new ResponseEntity(null, HttpStatus.NOT_ACCEPTABLE);
+        }
+
     }
 
 }
