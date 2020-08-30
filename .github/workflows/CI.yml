@@ -21,27 +21,10 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build with Maven jar
       run: mvn clean package spring-boot:repackage
-    - name: copy file via ssh key
-      uses: appleboy/scp-action@master
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        port: ${{ secrets.PORT }}
-        key: ${{ secrets.PKEY }}
-        source: "target/*.jar"
-        target: "/projects"
-    - name: Port kill
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: sudo fuser -k 8080/tcp
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        privateKey: ${{ secrets.PKEY }}
-
-    - name: Run spring via ssh
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: java -jar /projects/target/*.jar
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        privateKey: ${{ secrets.PKEY }}
+        username: ${{ secrets.DOCKER_UN }}
+        password: ${{ secrets.DOCKER_PW}}
+        repository: smenaka1104/anduna-group-api
+        tags: latest
