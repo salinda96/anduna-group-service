@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface DeviceRepo extends JpaRepository<Device,String> {
+
+    public List<Device> findAllByGroupId(String id);
 }

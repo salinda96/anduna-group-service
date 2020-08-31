@@ -1,8 +1,8 @@
 package lk.andunaechomedia.services.impl;
 
 import lk.andunaechomedia.constant.DeviceGroupStatus;
-import lk.andunaechomedia.dtos.SaveGroupDto;
-import lk.andunaechomedia.dtos.mapper.GroupMapper;
+import lk.andunaechomedia.dtos.getDtos.SaveGroupDto;
+import lk.andunaechomedia.dtos.getDtos.getMapper.GroupMapper;
 import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import lk.andunaechomedia.services.GroupService;
