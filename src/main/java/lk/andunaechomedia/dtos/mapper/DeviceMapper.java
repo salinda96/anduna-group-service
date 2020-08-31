@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLOutput;
 
 @Component
-public class AddDeviceMapper {
+public class DeviceMapper {
 
 
     @Autowired
@@ -32,8 +32,8 @@ public class AddDeviceMapper {
         device.setLocation_name(addDeviceDto.getLocation_name());
 
         device.setDeviceStatus(DeviceStatus.OFF);
-        device.setHdmiStatus(HDMIStatus.Disconnected);
-        device.setInternetStatus(InternetStatus.Disconnected);
+        device.setHdmiStatus(HDMIStatus.DISCONNECTED);
+        device.setInternetStatus(InternetStatus.DISCONNECTED);
 
 
         if (deviceGroupRepo.existsById(addDeviceDto.getGroup_id())) {
