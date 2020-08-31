@@ -1,4 +1,4 @@
-package lk.andunaechomedia.dtos;
+package lk.andunaechomedia.dtos.getDtos;
 
 import lk.andunaechomedia.constant.GPSStatus;
 import lombok.Getter;

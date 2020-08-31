@@ -1,4 +1,4 @@
-package lk.andunaechomedia.dtos;
+package lk.andunaechomedia.dtos.getDtos;
 
 import lombok.Getter;
 import lombok.Setter;
