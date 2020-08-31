@@ -10,5 +10,5 @@ public interface GroupService {
     public SaveGroupDto saveGroup(SaveGroupDto group);
     public Set<DeviceGroup> getDeviceGroupsByStatus(Boolean groupStatus);
     public List<DeviceGroup> getAll();
-    public DeviceGroup changeStatus(String id);
+    public DeviceGroup changeStatus(String id) throws Exception;
 }
