@@ -1,7 +1,7 @@
-package lk.andunaechomedia.dtos.mapper;
+package lk.andunaechomedia.dtos.getDtos.getMapper;
 
 import lk.andunaechomedia.constant.GPSStatus;
-import lk.andunaechomedia.dtos.SaveGroupDto;
+import lk.andunaechomedia.dtos.getDtos.SaveGroupDto;
 import lk.andunaechomedia.models.DeviceGroup;
 
 
