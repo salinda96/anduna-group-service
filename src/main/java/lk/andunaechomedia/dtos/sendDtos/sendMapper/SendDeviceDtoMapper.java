@@ -12,15 +12,16 @@ public class SendDeviceDtoMapper {
     public SendDeviceDto deviceMaptoSendDeviceDto(Device device){
 
         SendDeviceDto sendDeviceDto = new SendDeviceDto();
+
         sendDeviceDto.setInternetStatus(device.getInternetStatus() == InternetStatus.CONNECTED ? true : false);
         sendDeviceDto.setHdmiStatus(device.getHdmiStatus() == HDMIStatus.CONNECTED ? true : false);
-       sendDeviceDto.setDevice_id(device.getDevice_id());
-       sendDeviceDto.setCustomer_name(device.getCustomerName());
-       sendDeviceDto.setMain_broadcasting(null);
-       sendDeviceDto.setLayer_broadcasting(null);
-       sendDeviceDto.setDeviceStatus(device.getDeviceStatus() == DeviceStatus.ON ? true : false);
+        sendDeviceDto.setDevice_id(device.getDevice_id());
+        sendDeviceDto.setCustomer_name(device.getCustomerName());
+        sendDeviceDto.setMain_broadcasting(null);
+        sendDeviceDto.setLayer_broadcasting(null);
+        sendDeviceDto.setDeviceStatus(device.getDeviceStatus() == DeviceStatus.ON ? true : false);
 
-       return sendDeviceDto;
+        return sendDeviceDto;
 
     }
 
