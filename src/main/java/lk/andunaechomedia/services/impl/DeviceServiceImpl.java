@@ -1,22 +1,20 @@
 package lk.andunaechomedia.services.impl;
 
 import lk.andunaechomedia.dtos.AddDeviceDto;
-import lk.andunaechomedia.dtos.mapper.AddDeviceMapper;
+import lk.andunaechomedia.dtos.mapper.DeviceMapper;
 import lk.andunaechomedia.models.Device;
 import lk.andunaechomedia.repositories.DeviceRepo;
-import lk.andunaechomedia.services.AddDeviceService;
+import lk.andunaechomedia.services.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddDeviceServiceImpl implements AddDeviceService {
+public class DeviceServiceImpl implements DeviceService {
     @Autowired
     DeviceRepo deviceRepo;
 
-
-
     @Autowired
-    AddDeviceMapper addDeviceMapper;
+    DeviceMapper addDeviceMapper;
 
     @Override
     public Device addDevice(AddDeviceDto addDeviceDto) throws Exception {
