@@ -9,7 +9,7 @@ import lombok.Setter;
 public class SendDeviceDto {
 
     private String device_id;
-    private String customer_name;
+    private String locationName;
     private String main_broadcasting;
     private String layer_broadcasting;
     private Boolean deviceStatus;
