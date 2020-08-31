@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/device")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DeviceController {
     @Autowired
    private DeviceService deviceService;
