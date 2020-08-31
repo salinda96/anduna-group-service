@@ -34,7 +34,8 @@ public class DeviceGroupController {
 
     @RequestMapping(value = "/get/all",method = RequestMethod.GET)
     public List<DeviceGroup> getAllDeviceGroup(){
-    return groupService.getAll();
+
+        return groupService.getAll();
     }
 
     @RequestMapping(value = "/change/status",method = RequestMethod.PUT)
