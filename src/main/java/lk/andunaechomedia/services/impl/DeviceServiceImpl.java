@@ -1,13 +1,13 @@
 package lk.andunaechomedia.services.impl;
 
-import lk.andunaechomedia.constant.DeviceGroupStatus;
 import lk.andunaechomedia.constant.DeviceStatus;
 import lk.andunaechomedia.dtos.getDtos.AddDeviceDto;
 import lk.andunaechomedia.dtos.getDtos.getMapper.DeviceMapper;
 import lk.andunaechomedia.dtos.sendDtos.SendDeviceDto;
+import lk.andunaechomedia.dtos.sendDtos.SendDeviceDetailsDto;
 import lk.andunaechomedia.dtos.sendDtos.sendMapper.SendDeviceDtoMapper;
+import lk.andunaechomedia.dtos.sendDtos.sendMapper.SendDeviceDetailsDtoMapper;
 import lk.andunaechomedia.models.Device;
-import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.repositories.DeviceGroupRepo;
 import lk.andunaechomedia.repositories.DeviceRepo;
 import lk.andunaechomedia.services.DeviceService;
@@ -30,6 +30,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
     SendDeviceDtoMapper sendDeviceDtoMapper;
+
+    @Autowired
+    SendDeviceDetailsDtoMapper sendDeviceDetailsDtoMapper;
 
     @Override
     public Device addDevice(AddDeviceDto addDeviceDto) throws Exception {
@@ -64,9 +67,19 @@ public class DeviceServiceImpl implements DeviceService {
         else{
             throw new Exception();
         }
+    }
 
-
-
+    @Override
+    public SendDeviceDetailsDto deviceReportDetails(String id) throws Exception {
+        SendDeviceDetailsDto sendDeviceDetailsDto = new SendDeviceDetailsDto();
+        if(deviceRepo.existsById(id)) {
+            Device device = deviceRepo.findById(id).get();
+            sendDeviceDetailsDto = sendDeviceDetailsDtoMapper.deviceMaptoSendDeviceDetailstDto(device);
+            return sendDeviceDetailsDto;
+        }
+        else {
+            throw new Exception();
+        }
     }
 
 
