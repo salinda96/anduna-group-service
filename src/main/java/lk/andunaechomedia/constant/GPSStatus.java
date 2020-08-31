@@ -1,5 +1,5 @@
 package lk.andunaechomedia.constant;
 
-public enum GPSStatus {
+public enum     GPSStatus {
     ON,OFF
 }
