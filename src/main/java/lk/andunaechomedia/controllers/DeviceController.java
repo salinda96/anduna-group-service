@@ -2,6 +2,8 @@ package lk.andunaechomedia.controllers;
 
 import lk.andunaechomedia.dtos.getDtos.AddDeviceDto;
 import lk.andunaechomedia.dtos.sendDtos.SendDeviceDto;
+import lk.andunaechomedia.models.Device;
+import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.services.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -40,6 +42,17 @@ public class DeviceController {
         catch (Exception e){
             return new ResponseEntity(null,HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(value = "/changeStatus",method = RequestMethod.PUT)
+    public HttpEntity<Device> changeDeviceStatus(@RequestParam String id){
+        try{
+            return new ResponseEntity(deviceService.changeDeviceStatus(id),HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(null,HttpStatus.NOT_FOUND);
+        }
+
     }
 
 }
