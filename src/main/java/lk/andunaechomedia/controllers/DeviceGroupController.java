@@ -1,6 +1,6 @@
 package lk.andunaechomedia.controllers;
 
-import lk.andunaechomedia.dtos.SaveGroupDto;
+import lk.andunaechomedia.dtos.getDtos.SaveGroupDto;
 import lk.andunaechomedia.models.DeviceGroup;
 import lk.andunaechomedia.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package lk.andunaechomedia.services;
 
-import lk.andunaechomedia.constant.DeviceGroupStatus;
-import lk.andunaechomedia.dtos.SaveGroupDto;
+import lk.andunaechomedia.dtos.getDtos.SaveGroupDto;
 import lk.andunaechomedia.models.DeviceGroup;
 
 import java.util.List;

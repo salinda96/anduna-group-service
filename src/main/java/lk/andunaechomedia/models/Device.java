@@ -16,14 +16,14 @@ import javax.persistence.Id;
 public class Device {
     @Id
     private String device_id;
-    private String customer_name;
-    private String device_address;
-    private String tel_number;
+    private String customerName;
+    private String deviceAddress;
+    private String telNumber;
     private String origin;
     private String destination;
     private String route;
-    private String location_name;
-    private String group_id;
+    private String locationName;
+    private String groupId;
 
     @Enumerated
     private DeviceStatus deviceStatus;
