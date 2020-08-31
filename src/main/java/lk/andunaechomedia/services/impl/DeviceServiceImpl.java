@@ -54,17 +54,18 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device changeDeviceStatus(String id)throws Exception {
-        Device device = new Device();
+
         if(deviceRepo.existsById(id)){
-            device=deviceRepo.findById(id).get();
+            Device device=deviceRepo.findById(id).get();
             DeviceStatus deviceStatus= device.getDeviceStatus();
             device.setDeviceStatus(deviceStatus == DeviceStatus.OFF ? DeviceStatus.ON : DeviceStatus.OFF);
+            return deviceRepo.save(device);
         }
         else{
             throw new Exception();
         }
 
-        return deviceRepo.save(device);
+
 
     }
 
