@@ -20,11 +20,7 @@ public class DeviceGroupController {
     private GroupService groupService;
 
 
-    public DeviceGroupController() {
-    }
-
-    @RequestMapping(method = {RequestMethod.POST}, value = {"/add"})
-    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, value ="/add")
     public HttpEntity<SaveGroupDto> addGroup(@RequestBody SaveGroupDto group) {
         System.out.println( "oky");
             return  new ResponseEntity(groupService.saveGroup(group), HttpStatus.CREATED);
