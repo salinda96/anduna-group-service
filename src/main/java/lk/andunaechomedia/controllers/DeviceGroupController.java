@@ -15,27 +15,28 @@ import java.util.Set;
 @RestController
 
 @RequestMapping("/group")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DeviceGroupController {
     @Autowired
     private GroupService groupService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @RequestMapping(method = RequestMethod.POST, value ="/add")
     public HttpEntity<SaveGroupDto> addGroup(@RequestBody SaveGroupDto group) {
         System.out.println( "oky");
             return  new ResponseEntity(groupService.saveGroup(group), HttpStatus.CREATED);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @RequestMapping(value="/get/all/filter/status",method = RequestMethod.POST)
     public HttpEntity<Set<DeviceGroup>> getAllDeviceWithFilterStatus(@RequestParam Boolean status){
         return new ResponseEntity<>(groupService.getDeviceGroupsByStatus(status),HttpStatus.OK);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping(value = "/get/all",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/get/all",method = RequestMethod.GET)
     public List<DeviceGroup> getAllDeviceGroup(){
     return groupService.getAll();
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @RequestMapping(value = "/change/status",method = RequestMethod.PUT)
     public DeviceGroup onOffDevice(@RequestParam String id){
         return groupService.changeStatus(id);

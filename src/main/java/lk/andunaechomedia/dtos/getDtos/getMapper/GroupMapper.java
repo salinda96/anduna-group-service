@@ -1,5 +1,6 @@
 package lk.andunaechomedia.dtos.getDtos.getMapper;
 
+import lk.andunaechomedia.constant.DeviceGroupStatus;
 import lk.andunaechomedia.constant.GPSStatus;
 import lk.andunaechomedia.dtos.getDtos.SaveGroupDto;
 import lk.andunaechomedia.models.DeviceGroup;
@@ -16,6 +17,7 @@ public class GroupMapper {
         group.setGpsStatus(groupDto.isGpsStatus() ? GPSStatus.ON : GPSStatus.OFF);
         group.setGroupName(groupDto.getName());
         group.setBroadCastTime(LocalTime.parse(groupDto.getStartTime()));
+        group.setDeviceGroupStatus(DeviceGroupStatus.ACTIVATED);
         return group;
     }
 }
